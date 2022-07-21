@@ -1,9 +1,11 @@
+import { CommitCard } from 'components/CommitCard';
 import { GetStaticProps, InferGetStaticPropsType } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { FC } from 'react';
 import { createOctoClient } from 'services/createOctoClient';
-import { Commit, fetchCommits } from 'services/fetchCommits';
+import { fetchCommits } from 'services/fetchCommits';
+import { Commit } from 'services/types';
 import styles from '../styles/Home.module.css';
 
 export const getStaticProps: GetStaticProps<{
@@ -31,21 +33,7 @@ const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
         <h1 className={styles.title}>There are {commits.length} commits</h1>
         <div className={styles.grid}>
           {commits.map((commit) => (
-            <a
-              className={styles.card}
-              key={commit.url}
-              href={commit.url}
-              target="_blank"
-              rel="noreferrer"
-            >
-              <p>{commit.message}</p>
-              <small>
-                <time dateTime={commit.author.date}>
-                  {new Date(commit.author.date).toDateString()}
-                </time>{' '}
-                by {commit.author.name ?? 'Anonym'}
-              </small>
-            </a>
+            <CommitCard {...commit} key={commit.url} />
           ))}
         </div>
       </div>
