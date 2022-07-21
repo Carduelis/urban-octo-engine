@@ -20,7 +20,6 @@ export const getStaticProps: GetStaticProps<{
 const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
   commits,
 }) => {
-  console.log(commits);
   return (
     <div className={styles.container}>
       <Head>
@@ -37,6 +36,7 @@ const Home: FC<InferGetStaticPropsType<typeof getStaticProps>> = ({
               key={commit.url}
               href={commit.url}
               target="_blank"
+              rel="noreferrer"
             >
               <p>{commit.message}</p>
               <small>
