@@ -1,7 +1,7 @@
-import { Octokit } from '@octokit/core';
+import { Octokit } from "@octokit/core";
 
-export const createOctoClient = () => {
+export const createOctoClient = (personalAccessKey?: string) => {
   return new Octokit({
-    auth: process.env.PRIVATE_GITHUB_PERSONAL_ACCESS_KEY,
+    auth: personalAccessKey ?? process.env.PRIVATE_GITHUB_PERSONAL_ACCESS_KEY,
   });
 };
